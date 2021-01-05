@@ -15,7 +15,7 @@ jobs:
     name: Ubuntu 16.04 JDK 8
     runs-on: ubuntu-16.04
     env:
-        - NODE_VERSION="lts/*"
+      NODE_VERSION="lts/*"
 
     steps:
     - name: Checkout repository
@@ -83,7 +83,7 @@ jobs:
     name: macOS 10.15 JDK 8
     runs-on: macos-10.15
     env:
-      - HOMEBREW_NO_AUTO_UPDATE=1 # Prevent time-consuming brew update
+      HOMEBREW_NO_AUTO_UPDATE=1 # Prevent time-consuming brew update
 
     steps:
     - name: Checkout repository
