@@ -63,7 +63,7 @@ jobs:
 
     - name: Build with Gradle
       run: |
-        git --version
+        ./gradlew printVersion
         time ./gradlew clean checkstyleMain checkstyleTest test systemTest coverage
 
     - name: Run code coverage
