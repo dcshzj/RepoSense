@@ -52,7 +52,7 @@ jobs:
       run: ./config/travis/run-checks.sh
 
     - name: Run linter
-      run: npm run lint
+      run: npx run lint
 
     - name: Build with Gradle
       run: time ./gradlew clean checkstyleMain checkstyleTest test systemTest coverage
