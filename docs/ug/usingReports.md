@@ -15,10 +15,10 @@ Let's look at how to view, interpret, and interact with a RepoSense report.
 
 ## Viewing the report
 
-As the report consist of web pages, it can be viewed using a Web Browser. Here are the ways to view the report in different situations.
+As a report consists of web pages, it can be viewed using a Web Browser. Here are the ways to view the report in different situations.
 
 * **Situation 1: The report has been hosted on a website**
-  * Simply go to the URL of the report ([example](https://nus-cs2113-ay1920s2.github.io/tp-dashboard)) in your browser .
+  * Simply go to the URL of the report ([example](https://nus-cs2113-ay1920s2.github.io/tp-dashboard)) in your browser.
 * **Situation 2: You generated the report in your computer earlier**
   * Run RepoSense with the `--view` option:<br>
     Format: `java -jar RepoSense.jar --view REPORT_FOLDER`<br>
@@ -37,7 +37,7 @@ Here is an example of how a typical report looks like:
 
 ![report](../images/report-features.png)
 
-The report is divided into two sections: [_**Chart panel**_](#chart-panel) and the [_**Code panel**_](#code-panel). In some situations, the [_**Commits Panel**_](#commits-panel) will appear in place of the _code panel_. All three are explained in the sections below.
+The report is divided into two sections: [_**Chart panel**_](#chart-panel) and the [_**Code panel**_](#code-panel). In some situations, the [_**Commits panel**_](#commits-panel) will appear in place of the _code panel_. All three are explained in the sections below.
 
 <!-- ==================================================================================================== -->
 
@@ -89,22 +89,22 @@ The `Tool Bar` at the top of the Chart panel provides a set of configuration opt
   * Multiple keywords/terms can be used, separated by spaces.
   * Entries that contain _any_ (not necessarily _all_) of the search terms will be displayed.
   * The keywords used to filter author and repository are case-insensitive.
-* `Group by` : grouping criteria for the rows of results
+* `Group by` : grouping criteria for the rows of results.
   * `None` : results will not be grouped in any particular way.
   * `Repo/Branch` : results will be grouped by repositories and its' associating branches.
   * `Author` : results will be grouped by the name of the author. Contributions made to multiple repositories by a particular author will be grouped under the author.
 * `Sort groups by`: sorting criteria for the main group. See note [1] below.
   * `Group title` : groups will be sorted by the title of the group (in bold text) in alphabetical order.
-  * `Contribution` : groups will be sorted by the combined contributions within a group, in the order of number of lines added
+  * `Contribution` : groups will be sorted by the combined contributions within a group, in the order of number of lines added.
   * `Variance` : groups will be sorted by how far the daily contributions are spread out from their average value among all authors involved. Detailed definition of variance is located [here](https://en.wikipedia.org/wiki/Variance).
-* `Sort within groups by`: sorting criteria within each group
-  * `Title` : each group will be internally sorted by it's title in alphabetical order.
-  * `Contribution` : each group will be internally sorted by individual contributions in the order of number of lines added
+* `Sort within groups by`: sorting criteria within each group.
+  * `Title` : each group will be internally sorted by its title in alphabetical order.
+  * `Contribution` : each group will be internally sorted by individual contributions in the order of number of lines added.
   * `Variance` : each group will be internally sorted by how far the daily contributions are spread out from their average value by each author into a particular repo. Detailed definition of variance is located [here](https://en.wikipedia.org/wiki/Variance).
 * `Granularity` : the period of time for which commits are aggregated in the Ramp Chart.
-    * `Commit`: each commit made is shown as one ramp
-    * `Day`: commits within a day (commits made within 00:00 to 23:59) are shown as one ramp
-    * `Week`: commits within a week (from Monday 00:00 to Sunday 23:59) are shown as one ramp
+    * `Commit`: each commit made is shown as one ramp.
+    * `Day`: commits within a day (commits made within 00:00 to 23:59) are shown as one ramp.
+    * `Week`: commits within a week (from Monday 00:00 to Sunday 23:59) are shown as one ramp.
 * `Since`, `Until` : the date range for the Ramp Chart (not applied to the Contribution Bars).
 * `Reset date range` : resets the date range of the Ramp Chart to the default date range.
 * `Breakdown by file type` : toggles the contribution bar to either display the bar by :
@@ -114,8 +114,8 @@ The `Tool Bar` at the top of the Chart panel provides a set of configuration opt
     * viewing of authored code of the group as a whole is available when `group by repos`.
 
 Notes:<br>
-[1] **`Sort groups by`**: each main group has its own index and percentile according to its ranking position after sorting (e.g., if the groups are sorted by contribution in descending order, a 25% percentile indicates that the group is in the top 25% of the whole cohort in terms of contribution)<br>
-[2] **`Repo/Branch`**: the repo/branch name is constructed as `ORGANIZATION/REPOSITORY[BRANCH]` (e.g., `resposense/reposense[master]`)<br>
+[1] **`Sort groups by`**: each main group has its own index and percentile according to its ranking position after sorting (e.g., if the groups are sorted by contribution in descending order, a 25% percentile indicates that the group is in the top 25% of the whole cohort in terms of contribution)<br>.
+[2] **`Repo/Branch`**: the repo/branch name is constructed as `ORGANIZATION/REPOSITORY[BRANCH]` (e.g., `resposense/reposense[master]`)<br>.
 [3] The total contribution of each group will get updated based on the checked file types and will be taken into account when sorting criteria is contribution.
 
 <box type="tip" seamless>
@@ -132,7 +132,8 @@ The `Code panel` allows users to see the code attributed to a specific author. C
 * The Code panel shows the files that contain author's contributions, sorted by the number of lines written.
 * Select the radio button to enable one of the following 2 filters. Note that only 1 of the 2 filters is active at any time.
     * Type file path glob in glob filter to include files matching the glob expression.
-    * Select the checkboxes to include files of preferred file extensions.
+    * Select the checkboxes to include files of preferred file extensions. 
+    The number right beside the file extension shows the total number of lines written by the author in such file extension files. In contrast, the number inside the parenthesis indicates the number of non-blank lines written by the author.
 * Clicking the file title toggles the file content.
 * Clicking the first icon beside the file title opens the history view of the file on github.
 * Clicking the second icon beside the file title opens the blame view of the file on github.
@@ -141,10 +142,10 @@ The `Code panel` allows users to see the code attributed to a specific author. C
 
 <!-- ==================================================================================================== -->
 
-## Commits Panel
+## Commits panel
 <img src="../images/commits-panel.png" alt="commits panel" width="468">
 
-The `Commits Panel` allows users to see the commits attributed to a specific author.
+The `Commits panel` allows users to see the commits attributed to a specific author.
 * To view all commits attributed to an author, locate the author's ramp chart in the chart panel, and click on the %%:fas-list-ul:%% icon above the ramp chart.
 * To view commits of a specific period, locate the author's ramp chart in the chart panel, hold down the <kbd>Ctrl</kbd> key (<kbd>&#8984;</kbd> in MacOS), and click on the start and end positions of the period (on the ramp chart) you want to view. <br>
 
@@ -153,7 +154,7 @@ The `Commits Panel` allows users to see the commits attributed to a specific aut
 * The commits can be sorted by the date it was committed or by LoC.
 * The tags of the commits will also be displayed on top, if any. Clicking on a tag will direct you to the commit having that particular tag.
 * The date range for the `Chart panel` can be updated by clicking on the "Show ramp chart for this period" below the name of the author.
-* The ramp chart at the top of the `Commits Panel` represents individual commits (not weekly or daily contributions).
+* The ramp chart at the top of the `Commits panel` represents individual commits (not weekly or daily contributions).
 * The commit messages body can be expanded or collapsed by clicking on the %%:fas-ellipsis-h:%% icon beside each commit message title.
 * To promote and encourage the 50/72 rule for commit messages, a dotted vertical line will be shown for:
   * Commit message subject that exceeds 50 characters.

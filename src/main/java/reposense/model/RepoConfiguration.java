@@ -25,6 +25,7 @@ public class RepoConfiguration {
     private String branch;
     private String displayName;
     private String outputFolderName;
+    private transient String zoneId;
     private transient Date sinceDate;
     private transient Date untilDate;
     private transient String repoFolderName;
@@ -35,6 +36,7 @@ public class RepoConfiguration {
     private transient AuthorConfiguration authorConfig;
     private transient boolean isStandaloneConfigIgnored;
     private transient List<CommitHash> ignoreCommitList;
+    private transient boolean isLastModifiedDateIncluded;
     private transient boolean isFormatsOverriding;
     private transient boolean isIgnoreGlobListOverriding;
     private transient boolean isIgnoreCommitListOverriding;
@@ -80,6 +82,19 @@ public class RepoConfiguration {
         for (RepoConfiguration config : configs) {
             config.setSinceDate(sinceDate);
             config.setUntilDate(untilDate);
+        }
+    }
+
+    public static void setZoneIdToRepoConfigs(List<RepoConfiguration> configs, String zoneId) {
+        for (RepoConfiguration config : configs) {
+            config.setZoneId(zoneId);
+        }
+    }
+
+    public static void setIsLastModifiedDateIncludedToRepoConfigs(List<RepoConfiguration> configs,
+                                                                  boolean isLastModifiedDateIncluded) {
+        for (RepoConfiguration config : configs) {
+            config.setIsLastModifiedDateIncluded(isLastModifiedDateIncluded);
         }
     }
 
@@ -291,6 +306,7 @@ public class RepoConfiguration {
                 && ignoredAuthorsList.equals(otherRepoConfig.ignoredAuthorsList)
                 && isStandaloneConfigIgnored == otherRepoConfig.isStandaloneConfigIgnored
                 && fileTypeManager.equals(otherRepoConfig.fileTypeManager)
+                && isLastModifiedDateIncluded == otherRepoConfig.isLastModifiedDateIncluded
                 && isFormatsOverriding == otherRepoConfig.isFormatsOverriding
                 && isIgnoreGlobListOverriding == otherRepoConfig.isIgnoreGlobListOverriding
                 && isIgnoreCommitListOverriding == otherRepoConfig.isIgnoreCommitListOverriding
@@ -316,10 +332,18 @@ public class RepoConfiguration {
         authorConfig.setBranch(branch);
     }
 
+    /**
+     * Updates the branch in the {@code displayName} to the
+     * current {@code branch}.
+     */
     public void updateDisplayName(String branch) {
         this.displayName = displayName.substring(0, displayName.lastIndexOf('[') + 1) + branch + "]";
     }
 
+    /**
+     * Updates the branch in the {@code outputFolderName} to the
+     * current {@code branch}.
+     */
     public void updateOutputFolderName(String branch) {
         this.outputFolderName = outputFolderName.substring(0, outputFolderName.lastIndexOf('_') + 1) + branch;
     }
@@ -350,6 +374,14 @@ public class RepoConfiguration {
 
     public boolean isIgnoredAuthorsListOverriding() {
         return this.isIgnoredAuthorsListOverriding;
+    }
+
+    public void setIsLastModifiedDateIncluded(boolean lastModifiedDateIncluded) {
+        this.isLastModifiedDateIncluded = lastModifiedDateIncluded;
+    }
+
+    public boolean isLastModifiedDateIncluded() {
+        return this.isLastModifiedDateIncluded;
     }
 
     public void setIsIgnoredAuthorsListOverriding(boolean isIgnoredAuthorsListOverriding) {
@@ -393,12 +425,12 @@ public class RepoConfiguration {
         authorList.forEach(author -> AuthorConfiguration.propagateIgnoreGlobList(author, this.getIgnoreGlobList()));
     }
 
-    public Map<String, Author> getAuthorEmailsAndAliasesMap() {
-        return authorConfig.getAuthorEmailsAndAliasesMap();
+    public Map<String, Author> getAuthorDetailsToAuthorMap() {
+        return authorConfig.getAuthorDetailsToAuthorMap();
     }
 
-    public void setAuthorEmailsAndAliasesMap(Map<String, Author> authorEmailsAndAliasesMap) {
-        authorConfig.setAuthorEmailsAndAliasesMap(authorEmailsAndAliasesMap);
+    public void setAuthorDetailsToAuthorMap(Map<String, Author> authorDetailsToAuthorMap) {
+        authorConfig.setAuthorDetailsToAuthorMap(authorDetailsToAuthorMap);
     }
 
     public void setFormats(List<FileType> formats) {
@@ -444,12 +476,20 @@ public class RepoConfiguration {
         this.untilDate = untilDate;
     }
 
+    public String getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(String zoneId) {
+        this.zoneId = zoneId;
+    }
+
     public void setAuthorDisplayName(Author author, String displayName) {
         authorConfig.setAuthorDisplayName(author, displayName);
     }
 
-    public void addAuthorEmailsAndAliasesMapEntry(Author author, List<String> values) {
-        authorConfig.addAuthorEmailsAndAliasesMapEntry(author, values);
+    public void addAuthorDetailsToAuthorMapEntry(Author author, List<String> values) {
+        authorConfig.addAuthorDetailsToAuthorMapEntry(author, values);
     }
 
     public String getDisplayName() {
