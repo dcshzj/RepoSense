@@ -62,7 +62,7 @@ jobs:
         npm run lint
 
     - name: Build with Gradle
-      run: time ./gradlew --debug --scan clean checkstyleMain checkstyleTest test systemTest coverage
+      run: time ./gradlew --debug --stacktrace clean checkstyleMain checkstyleTest test systemTest coverage
 
     - name: Run code coverage
       if: ${{ success() }}
