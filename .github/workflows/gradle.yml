@@ -24,6 +24,9 @@ jobs:
       with:
         java-version: 1.8
 
+    - name: Verify Java version
+      run: echo -e "Actual JDK in use -- "; java -version
+
     - name: Set up Gradle caching
       uses: actions/cache@v2
       with:
