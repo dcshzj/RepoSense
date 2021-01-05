@@ -60,7 +60,7 @@ jobs:
 
     - name: Run linter
       run: |
-        npm install --only=dev
+        npm install
         npm run lint
 
     - name: Build with Gradle
@@ -128,7 +128,7 @@ jobs:
 
     - name: Run linter
       run: |
-        npm install --only=dev
+        npm install
         npm run lint
 
     - name: Build with Gradle
@@ -177,7 +177,7 @@ jobs:
       run: chmod +x gradlew
 
     - name: Install packages
-      run: npm install --only=dev
+      run: npm install
 
     - name: Set up Cypress
       uses: cypress-io/github-action@v2
