@@ -27,6 +27,11 @@ jobs:
     - name: Verify Java version
       run: echo -e "Actual JDK in use -- "; java -version
 
+    - name: Set up Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+
     - name: Set up Gradle caching
       uses: actions/cache@v2
       with:
@@ -52,7 +57,7 @@ jobs:
       run: ./config/travis/run-checks.sh
 
     - name: Run linter
-      run: npx run lint
+      run: npm run lint
 
     - name: Build with Gradle
       run: time ./gradlew clean checkstyleMain checkstyleTest test systemTest coverage
