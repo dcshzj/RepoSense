@@ -174,7 +174,7 @@ task coverage(type: JacocoReport) {
 String getRepoSenseVersion() {
     String repoSenseVersion = project.property("version")
     if (!versionDetails()) {
-        logger.lifecycle("This is null or empty.")
+        logger.quiet("This is null or empty.")
     }
     if (repoSenseVersion.equals("unspecified")) {
         repoSenseVersion = versionDetails().commitDistance == 0 ? versionDetails().lastTag : versionDetails().gitHash
