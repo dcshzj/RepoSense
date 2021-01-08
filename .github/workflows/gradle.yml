@@ -124,7 +124,7 @@ jobs:
       run: chmod +x gradlew
 
     - name: Run environmental checks
-      run: ./config/travis/run-checks.sh
+      run: ./config/gh-actions/run-checks.sh
 
     - name: Run linter
       run: |
