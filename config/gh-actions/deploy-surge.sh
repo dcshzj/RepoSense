@@ -60,6 +60,8 @@ do
   echo "Deploy domain: ${MARKBIND_DEPLOY_DOMAIN}"
   surge --project ${MARKBIND_DEPLOY_PATH} --domain $MARKBIND_DEPLOY_DOMAIN;
 
+  echo $GITHUB_SHA
+
   if [ "$ACTION_IS_PULL_REQUEST" != "false" ] # only create github statuses when it is a PR
   then
     # Create github statuses that redirects users to the deployed dashboard and markbind docs
