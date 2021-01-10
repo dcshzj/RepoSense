@@ -67,7 +67,7 @@ Contributor [2019 May - 2020 May]<br/>
 <!-- ------------------------------------------------------------------------------------------------------ -->
 
 ### [Hsu Zhong Jun](https://github.com/dcshzj)
-**Role**: Contributor [2021 January - ]<br/>
+**Role**: Contributor [2020 August - ]<br/>
 
 <!-- ------------------------------------------------------------------------------------------------------ -->
 
@@ -105,7 +105,7 @@ Committer [2018 May - 2018 Aug]<br/>
 
 ### [Teng Yong Hao](https://github.com/yong24s)
 ![](https://avatars2.githubusercontent.com/u/2003406?s=150&v=4)<br/>
-**Role**: 
+**Role**:
 Mentor [2018 Dec - 2020 May]<br/>
 Committer [2018 Aug - 2018 Dec]<br/>
 Contributor [2018 May - 2018 Aug]<br/>
