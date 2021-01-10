@@ -62,6 +62,7 @@ do
 
   if [ "$ACTION_IS_PULL_REQUEST" != "false" ] # only create github statuses when it is a PR
   then
+    echo "https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/statuses/${ACTIONS_PULL_REQUEST_HEAD}?access_token=${GITHUB_TOKEN}"
     # Create github statuses that redirects users to the deployed dashboard and markbind docs
     curl "https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/statuses/${ACTIONS_PULL_REQUEST_HEAD}?access_token=${GITHUB_TOKEN}" \
     -H "Content-Type: application/json" \
