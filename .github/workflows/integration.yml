@@ -26,6 +26,9 @@ jobs:
     - name: Update PR checklist for surge.sh as pending (pull request)
       if: ${{ github.event_name == 'pull_request' }}
       env:
+        ACTIONS_EVENT_NAME: ${{ github.event_name }}
+        ACTIONS_PULL_REQUEST_HEAD: ${{ github.event.number }}
+        ACTIONS_PULL_REQUEST_NUMBER: ${{ github.event.pull_request.head.sha }}
         GITHUB_TOKEN: ${{ github.token }}
       run: ./config/gh-actions/deploy-surge.sh pending
 
@@ -103,8 +106,11 @@ jobs:
           ./pr
 
     - name: Update PR checklist as failure (pull request)
-      if: ${{ failure() }}
+      if: ${{ failure() && github.event_name == 'pull_request' }}
       env:
+        ACTIONS_EVENT_NAME: ${{ github.event_name }}
+        ACTIONS_PULL_REQUEST_HEAD: ${{ github.event.number }}
+        ACTIONS_PULL_REQUEST_NUMBER: ${{ github.event.pull_request.head.sha }}
         GITHUB_TOKEN: ${{ github.token }}
       run: ./config/gh-actions/deploy-surge.sh failure
 
