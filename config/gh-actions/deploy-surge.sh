@@ -24,7 +24,7 @@ then
   exit 1
 fi
 
-if [ "$ACTIONS_EVENT_NAME" != "workflow_run" ] && [ "$ACTIONS_EVENT_NAME" == "pull_request" ]
+if [ "$GITHUB_EVENT_NAME" != "workflow_run" ] && [ "$GITHUB_EVENT_NAME" != "pull_request" ]
 then
   echo "ERROR: This script is intended to be run for either the pull_request or workflow_run workflows only!"
   exit 1
@@ -39,7 +39,7 @@ MARKBIND_DEPLOY_PATH=./docs/_site
 ACTIONS_DEPLOY="false"
 ACTIONS_WORKFLOW_RUN_URL="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
 
-if [ "$ACTIONS_EVENT_NAME" == "workflow_run" ]
+if [ "$GITHUB_EVENT_NAME" == "workflow_run" ]
 then
   ACTIONS_DEPLOY="true"
   ACTIONS_PULL_REQUEST_HEAD=$(cat ./pr/SHA)
