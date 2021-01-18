@@ -45,5 +45,6 @@ jobs:
       env:
         SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
         SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+        ACTIONS_EVENT_NAME: ${{ github.event_name }}
         GITHUB_TOKEN: ${{ github.token }}
       run: ./config/gh-actions/deploy-surge.sh success
