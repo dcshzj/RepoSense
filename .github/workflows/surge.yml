@@ -43,7 +43,7 @@ jobs:
         workflow: pending.yml
         workflow_conclusion: success
         name: reposense-deployment-id
-        path: .
+        path: ./pr
 
     - name: Update PR checklist for surge.sh as in progress
       if: ${{ success() }}
