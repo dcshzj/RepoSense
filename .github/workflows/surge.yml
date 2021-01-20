@@ -34,14 +34,14 @@ jobs:
       with:
         workflow: integration.yml
         workflow_conclusion: success
-        path: .
+        path: ./integration
 
     - name: Download deployment status artifacts
       uses: dawidd6/action-download-artifact@v2
       with:
         workflow: pending.yml
         workflow_conclusion: success
-        path: .
+        path: ./deployment
 
     - name: Update PR checklist for surge.sh as in progress
       if: ${{ success() }}
