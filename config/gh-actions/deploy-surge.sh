@@ -40,8 +40,8 @@ create_deployment() {
   -H "Content-Type: application/json" \
   -H "Authorization: token ${GITHUB_TOKEN}" \
   -X POST \
-  -d "{\"ref\": \"${ACTIONS_PULL_REQUEST_HEAD}\",\"auto_merge\": false, \"required_contexts\": [], \"environment\": \"$1\", \"description\": \"$2\"}"
-  # python3 -c "import sys, json; print(json.load(sys.stdin)['id'])"
+  -d "{\"ref\": \"${ACTIONS_PULL_REQUEST_HEAD}\",\"auto_merge\": false, \"required_contexts\": [], \"environment\": \"$1\", \"description\": \"$2\"}" | \
+  python3 -c "import sys, json; print(json.load(sys.stdin)['id'])"
 }
 
 # Function to update GitHub deployment status via a cURL command
@@ -118,9 +118,8 @@ do
   elif [ "$ACTIONS_STATUS" == "queued" ]
   then
     # Set GitHub status to queued so that reviewers know that it is part of the checklist
-    # ACTIONS_DASHBOARD_ID=$(create_deployment "dashboard" "RepoSense dashboard preview")
-    # ACTIONS_DOCS_ID=$(create_deployment "docs" "RepoSense documentation preview")
-    create_deployment "dashboard" "RepoSense dashboard preview"
+    ACTIONS_DASHBOARD_ID=$(create_deployment "dashboard" "RepoSense dashboard preview")
+    ACTIONS_DOCS_ID=$(create_deployment "docs" "RepoSense documentation preview")
 
     update_deployment "${ACTIONS_DASHBOARD_ID}" "queued" "Dashboard queued for deployment" "dashboard" "${ACTIONS_WORKFLOW_RUN_URL}"
     update_deployment "${ACTIONS_DOCS_ID}" "queued" "Docs queued for deployment" "docs" "${ACTIONS_WORKFLOW_RUN_URL}"
