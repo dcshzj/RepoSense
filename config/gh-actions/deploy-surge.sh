@@ -41,7 +41,8 @@ create_deployment() {
   -H "Authorization: token ${GITHUB_TOKEN}" \
   -X POST \
   -d "{\"ref\": \"${ACTIONS_PULL_REQUEST_HEAD}\",\"auto_merge\": \"false\", \"environment\": \"$1\", \"description\": \"$2\"}" | \
-  python3 -c "import sys, json; print(json.load(sys.stdin)['id'])"
+  python3 -c "import sys; print(sys.stdin)"
+  # python3 -c "import sys, json; print(json.load(sys.stdin)['id'])"
 }
 
 # Function to update GitHub deployment status via a cURL command
