@@ -22,7 +22,7 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Save PR number and HEAD commit (pull request)
+    - name: Save PR number and HEAD commit
       run: |
         mkdir -p ./pr
         echo ${{ github.event.number }} > ./pr/NUMBER
