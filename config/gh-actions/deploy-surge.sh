@@ -40,7 +40,7 @@ update_status() {
 
   curl "https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/statuses/${ACTIONS_PULL_REQUEST_HEAD}" \
   -H "Content-Type: application/json" \
-  -H "Authorization: token ${GITHUB_TOKEN}"
+  -H "Authorization: token ${GITHUB_TOKEN}" \
   -X POST \
   -d "{\"state\": \"$2\",\"context\": \"${ACTIONS_STATUS_CONTEXT}\", \"description\": \"$3\", \"target_url\": \"$4\"}"
 }
