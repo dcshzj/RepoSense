@@ -108,21 +108,21 @@ do
   if [ "$ACTIONS_STATUS" == "failure" ]
   then
     # Update GitHub status to failed
-    update_deployment "${ACTIONS_DASHBOARD_ID}" "failure" "Dashboard deploy failed" "dashboard" "${ACTIONS_WORKFLOW_RUN_URL}"
-    update_deployment "${ACTIONS_DOCS_ID}" "failure" "Docs deploy failed" "docs" "${ACTIONS_WORKFLOW_RUN_URL}"
+    update_deployment "${ACTIONS_DASHBOARD_ID}" "failure" "Dashboard deploy failed" "dashboard"
+    update_deployment "${ACTIONS_DOCS_ID}" "failure" "Docs deploy failed" "docs"
   elif [ "$ACTIONS_STATUS" == "in_progress" ]
   then
     # Set GitHub status to in_progress to indicate that deployment is in progress
-    update_deployment "${ACTIONS_DASHBOARD_ID}" "in_progress" "Dashboard deployment in progress..." "dashboard" "${ACTIONS_WORKFLOW_RUN_URL}"
-    update_deployment "${ACTIONS_DOCS_ID}" "in_progress" "Docs deployment in progress..." "docs" "${ACTIONS_WORKFLOW_RUN_URL}"
+    update_deployment "${ACTIONS_DASHBOARD_ID}" "in_progress" "Dashboard deployment in progress..." "dashboard"
+    update_deployment "${ACTIONS_DOCS_ID}" "in_progress" "Docs deployment in progress..." "docs"
   elif [ "$ACTIONS_STATUS" == "queued" ]
   then
     # Set GitHub status to queued so that reviewers know that it is part of the checklist
     ACTIONS_DASHBOARD_ID=$(create_deployment "dashboard" "RepoSense dashboard preview")
     ACTIONS_DOCS_ID=$(create_deployment "docs" "RepoSense documentation preview")
 
-    update_deployment "${ACTIONS_DASHBOARD_ID}" "queued" "Dashboard queued for deployment" "dashboard" "${ACTIONS_WORKFLOW_RUN_URL}"
-    update_deployment "${ACTIONS_DOCS_ID}" "queued" "Docs queued for deployment" "docs" "${ACTIONS_WORKFLOW_RUN_URL}"
+    update_deployment "${ACTIONS_DASHBOARD_ID}" "queued" "Dashboard queued for deployment" "dashboard"
+    update_deployment "${ACTIONS_DOCS_ID}" "queued" "Docs queued for deployment" "docs"
 
     echo "$ACTIONS_DASHBOARD_ID" > ./pr/DASHBOARD_ID
     echo "$ACTIONS_DOCS_ID" > ./pr/DOCS_ID
