@@ -17,10 +17,10 @@ then
   echo "ERROR: This script requires a status supplied as the first parameter"
   echo "Available values: failure, pending, success"
   exit 1
-elif [ "$ACTIONS_STATUS" != "failure" ] && [ "$ACTIONS_STATUS" != "in_progress" ] && [ "$ACTIONS_STATUS" != "queued" ] && [ "$ACTIONS_STATUS" != "success" ]
+elif [ "$ACTIONS_STATUS" != "failure" ] && [ "$ACTIONS_STATUS" != "in_progress" ] && [ "$ACTIONS_STATUS" != "pending" ] && [ "$ACTIONS_STATUS" != "success" ]
 then
   echo "ERROR: The status supplied is not a valid status"
-  echo "Available values: failure, in_progress, queued, success"
+  echo "Available values: failure, in_progress, pending, success"
   exit 1
 fi
 
@@ -70,22 +70,18 @@ update_deployment() {
 REPO_SLUG_ARRAY=(${GITHUB_REPOSITORY//\// })
 REPO_OWNER=${REPO_SLUG_ARRAY[0]}
 REPO_NAME=${REPO_SLUG_ARRAY[1]}
-DASHBOARD_DEPLOY_PATH=./reposense-report
-MARKBIND_DEPLOY_PATH=./docs/_site
+DASHBOARD_DEPLOY_PATH=./integration/reposense-report
+MARKBIND_DEPLOY_PATH=./integration/docs/_site
 ACTIONS_DEPLOY="false"
 ACTIONS_WORKFLOW_RUN_URL="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
 
 if [ "$GITHUB_EVENT_NAME" == "workflow_run" ]
 then
   ACTIONS_DEPLOY="true"
-  ACTIONS_PULL_REQUEST_HEAD=$(cat ./pr/SHA)
-  ACTIONS_PULL_REQUEST_NUMBER=$(cat ./pr/NUMBER)
-fi
-
-if [ -e "./pr/DASHBOARD_ID" ] && [ -e "./pr/DOCS_ID" ]
-then
-  ACTIONS_DASHBOARD_ID=$(cat ./pr/DASHBOARD_ID)
-  ACTIONS_DOCS_ID=$(cat ./pr/DOCS_ID)
+  ACTIONS_PULL_REQUEST_HEAD=$(cat ./deployment/pr/SHA)
+  ACTIONS_PULL_REQUEST_NUMBER=$(cat ./deployment/pr/NUMBER)
+  ACTIONS_DASHBOARD_ID=$(cat ./deployment/pr/DASHBOARD_ID)
+  ACTIONS_DOCS_ID=$(cat ./deployment/pr/DOCS_ID)
 fi
 
 DEPLOY_SUBDOMAIN_UNFORMATTED_LIST=()
@@ -115,14 +111,14 @@ do
     # Set GitHub status to in_progress to indicate that deployment is in progress
     update_deployment "${ACTIONS_DASHBOARD_ID}" "in_progress" "Dashboard deployment in progress..." "dashboard"
     update_deployment "${ACTIONS_DOCS_ID}" "in_progress" "Docs deployment in progress..." "docs"
-  elif [ "$ACTIONS_STATUS" == "queued" ]
+  elif [ "$ACTIONS_STATUS" == "pending" ]
   then
-    # Set GitHub status to queued so that reviewers know that it is part of the checklist
+    # Set GitHub status to pending so that reviewers know that it is part of the checklist
     ACTIONS_DASHBOARD_ID=$(create_deployment "dashboard" "RepoSense dashboard preview")
     ACTIONS_DOCS_ID=$(create_deployment "docs" "RepoSense documentation preview")
 
-    echo "$ACTIONS_DASHBOARD_ID" > ./pr/DASHBOARD_ID
-    echo "$ACTIONS_DOCS_ID" > ./pr/DOCS_ID
+    echo "$ACTIONS_DASHBOARD_ID" > ./deployment/pr/DASHBOARD_ID
+    echo "$ACTIONS_DOCS_ID" > ./deployment/pr/DOCS_ID
   elif [ "$ACTIONS_STATUS" == "success" ] && [ "$ACTIONS_DEPLOY" == "true" ]
   then
     DASHBOARD_DEPLOY_DOMAIN=https://dashboard-${DEPLOY_SUBDOMAIN}-${REPO_NAME}-${REPO_OWNER}.surge.sh
