@@ -24,9 +24,9 @@ then
   exit 1
 fi
 
-if [ "$GITHUB_EVENT_NAME" != "workflow_run" ] && [ "$GITHUB_EVENT_NAME" != "pull_request" ]
+if [ "$GITHUB_EVENT_NAME" != "workflow_run" ] && [ "$GITHUB_EVENT_NAME" != "pull_request" ] && [ "$GITHUB_EVENT_NAME" != "pull_request_target" ]
 then
-  echo "ERROR: This script is intended to be run for either the pull_request or workflow_run workflows only!"
+  echo "ERROR: This script is intended to be run for either the pull_request, pull_request_target or workflow_run workflows only!"
   exit 1
 fi
 
