@@ -117,8 +117,8 @@ do
     ACTIONS_DASHBOARD_ID=$(create_deployment "dashboard" "RepoSense dashboard preview")
     ACTIONS_DOCS_ID=$(create_deployment "docs" "RepoSense documentation preview")
 
-    echo "$ACTIONS_DASHBOARD_ID" > ./deployment/pr/DASHBOARD_ID
-    echo "$ACTIONS_DOCS_ID" > ./deployment/pr/DOCS_ID
+    echo "$ACTIONS_DASHBOARD_ID" > ./pr/DASHBOARD_ID
+    echo "$ACTIONS_DOCS_ID" > ./pr/DOCS_ID
   elif [ "$ACTIONS_STATUS" == "success" ] && [ "$ACTIONS_DEPLOY" == "true" ]
   then
     DASHBOARD_DEPLOY_DOMAIN=https://dashboard-${DEPLOY_SUBDOMAIN}-${REPO_NAME}-${REPO_OWNER}.surge.sh
