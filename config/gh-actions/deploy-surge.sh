@@ -40,8 +40,7 @@ create_deployment() {
   -H "Content-Type: application/json" \
   -H "Authorization: token ${GITHUB_TOKEN}" \
   -X POST \
-  -d "{\"ref\": \"${ACTIONS_PULL_REQUEST_HEAD}\",\"auto_merge\": false, \"environment\": \"$1\", \"description\": \"$2\"}" | \
-  python3 -c "import sys; print(sys.stdin)"
+  -d "{\"ref\": \"${ACTIONS_PULL_REQUEST_HEAD}\",\"auto_merge\": false, \"environment\": \"$1\", \"description\": \"$2\"}"
   # python3 -c "import sys, json; print(json.load(sys.stdin)['id'])"
 }
 
